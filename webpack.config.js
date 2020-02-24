@@ -1,13 +1,15 @@
 const webpack = require('webpack');
 const path = require('path')
+const JS_ROOT = path.join(__dirname, "frontend", "src", "scripts")
 
 module.exports = {
+  mode: "development",
   entry: {
-    app: path.join(__dirname, "frontend", "src", "scripts", "app.js"),
+    vue_app: path.join(JS_ROOT, "vue_app.js"),
   },
   output: {
     path: path.join(__dirname, "app", "assets", "javascripts"),
-    filename: "[name].js",
+    filename: "[name].bundle.js",
   },
   module: {
     rules: [

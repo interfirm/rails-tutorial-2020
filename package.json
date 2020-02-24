@@ -2,8 +2,8 @@
   "name": "rails-tutorial",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server",
-    "dev": "webpack --watch --mode development"
+    "start": "yarn watch",
+    "watch": "webpack --watch"
   },
   "dependencies": {},
   "devDependencies": {
