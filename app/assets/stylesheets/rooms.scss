@@ -4,7 +4,6 @@
 
 .chat {
   width: 300px;
-  padding: 0 5px;
   border: 1px solid lightgray;
   border-radius: 2px;
   position: fixed;
@@ -13,17 +12,20 @@
   .header {
     display: flex;
     height: 30px;
-    margin: 0 -5px;
     line-height: 30px;
-    background-color: cornsilk;
+    .title {
+      width: 100%;
+      background-color: cornsilk;
+    }
     .close-btn {
-      display: none;
+      width: 30px;
+      text-align: center;
       background-color: white;
       margin-left: auto;
     }
   }
   .content {
-    display: none;
+    padding: 0 5px;
     #messages {
       height: 450px;
       overflow: scroll;

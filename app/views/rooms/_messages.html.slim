@@ -1,9 +1,9 @@
-#vue-template-messages
+script#vue-template-messages(type="text/x-template")
   .chat
-    .header(v-on:click='open')
-      .title
+    .header
+      .title(v-on:click='open')
         | message
-      .close-btn(v-on:click='close')
+      .close-btn(v-on:click='close' v-show='isOpen')
         | x
     .content(v-show='isOpen')
       #messages(data-room_id="#{@room.id}")
@@ -11,3 +11,5 @@
 
       form
         textarea(type='text' data-behavior='room_speaker')
+
+messages

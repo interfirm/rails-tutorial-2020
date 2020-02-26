@@ -1,7 +1,5 @@
-import Vue from 'vue'
-
-new Vue({
-  el: '#vue-template-messages',
+export default {
+  template: '#vue-template-messages',
 
   data() {
     return {
@@ -11,12 +9,12 @@ new Vue({
 
   methods: {
     open () {
-      if (isOpen) return
-      isOpen = true
+      if (this.isOpen) return
+      this.isOpen = true
     },
     close () {
-      if (!isOpen) return
-      isOpen = false
+      if (!this.isOpen) return
+      this.isOpen = false
     }
   },
-})
+}
