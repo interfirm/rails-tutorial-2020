@@ -1,10 +1,3 @@
 h1 Customer
 
-h3 messages
-
-#messages(data-room_id="#{@room.id}")
-  = render(partial: "messages/message", collection: @messages)
-
-form
-  label Say something:<br>
-  input(type="text" data-behavior="room_speaker")
+== render 'messages'

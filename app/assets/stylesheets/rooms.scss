@@ -1,3 +1,45 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.chat {
+  width: 300px;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  position: fixed;
+  right: 50px;
+  bottom: 10px;
+  .header {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+    .title {
+      width: 100%;
+      background-color: cornsilk;
+    }
+    .close-btn {
+      width: 30px;
+      text-align: center;
+      background-color: white;
+      margin-left: auto;
+    }
+  }
+  .content {
+    padding: 0 5px;
+    #messages {
+      height: 450px;
+      overflow: scroll;
+    }
+    textarea {
+      box-sizing: content-box;
+      height: 24px;
+      padding: 1px;
+      line-height: 24px;
+      border: none;
+      border-bottom: solid 1px #d3d3d3;
+      width: 100%;
+      color: #000000;
+    }
+  }
+}
+

@@ -12,7 +12,9 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
-    <%= yield %>
+    <div id="vue-root">
+      <%= yield %>
+    </div>
   </body>
+  <%= javascript_include_tag 'vue_app' %>
 </html>

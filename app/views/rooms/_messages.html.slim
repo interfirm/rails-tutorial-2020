@@ -1,0 +1,15 @@
+script#vue-template-messages(type="text/x-template")
+  .chat
+    .header
+      .title(v-on:click='open')
+        | message
+      .close-btn(v-on:click='close' v-show='isOpen')
+        | x
+    .content(v-show='isOpen')
+      #messages(data-room_id="#{@room.id}")
+        = render(partial: 'messages/message', collection: @messages)
+
+      form
+        textarea(type='text' data-behavior='room_speaker')
+
+messages
