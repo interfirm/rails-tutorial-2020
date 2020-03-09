@@ -1,0 +1,21 @@
+.rooms {
+  width: 70%;
+}
+
+.room {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #d3d3d3;
+  .header {
+    display: flex;
+    line-height: 1em;
+    .title {
+      margin-right: 20px;
+    }
+  }
+  .content {
+    height: 2.6em;
+    line-height: 1.3em;
+    overflow: hidden;
+  }
+}

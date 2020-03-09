@@ -1,0 +1,10 @@
+= link_to admins_room_path(room), class: 'room' do
+  .header
+    .title
+      = room.id
+    .timestamp
+      - if room.messages.last
+        = message_datetime(datetime: room.messages.last.created_at)
+  .content
+    - if room.messages.last
+      = "#{room.messages.last.messageable.sender_name}：#{room.messages.last.content}"

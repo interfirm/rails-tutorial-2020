@@ -1,4 +1,4 @@
 h1 index
 
-- @rooms.each do |room| 
-  = link_to("#{room.id}", admins_room_path(room))
+.rooms
+  = render(partial: 'room', collection: @rooms)
