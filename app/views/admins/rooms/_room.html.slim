@@ -3,6 +3,7 @@
     .title
       = room.id
     .timestamp
+    div class="timestamp #{'unread' if room.has_unread_message?(@current_admin)}"
       - if room.messages.last
         = message_datetime(datetime: room.messages.last.created_at)
   .content

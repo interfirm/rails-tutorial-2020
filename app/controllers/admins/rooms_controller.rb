@@ -3,6 +3,7 @@ module Admins
     before_action :authenticate_admin!
 
     def index
+      @current_admin = current_admin
       @rooms = current_admin.rooms
     end
 
