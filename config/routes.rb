@@ -7,5 +7,12 @@ Rails.application.routes.draw do
   end
   get 'rooms/enter', to: 'rooms#enter'
 
+  namespace :api do
+    namespace :admins do
+      post 'read_message/:id', to: 'rooms#update'
+    end
+    post 'read_message/:id', to: 'rooms#update'
+  end
+
   mount ActionCable.server => '/cable'
 end

@@ -9,6 +9,8 @@ module Admins
 
     def show
       @room = Room.find(params[:id])
+      @admin_room = AdminRoom.find_by(room_id: params[:id], admin_id: current_admin.id)
+      @admin_room.update_attribute(:last_read_message_id, @room.messages.last.id)
       @messages = @room.messages
     end
   end

@@ -2,7 +2,8 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(message)
-    RoomChannel.broadcast_to(message.room.id, message: render_message(message), room_id: message.room.id)
+    sender = message.messageable.sender_name == 'ゲスト' ? 'customer' : 'admin'
+    RoomChannel.broadcast_to(message.room.id, message: render_message(message), room_id: message.room.id, message_id: message.id, sender: sender)
   end
 
   private

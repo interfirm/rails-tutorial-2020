@@ -1,9 +1,8 @@
 = link_to admins_room_path(room), class: 'room' do
-  .header
+  .header id="room_id_#{room.id}"
     .title
       = room.id
-    .timestamp
-    div class="timestamp #{'unread' if room.has_unread_message?(@current_admin)}"
+    .timestamp class=('unread' if room.has_unread_message?(@current_admin))
       - if room.messages.last
         = message_datetime(datetime: room.messages.last.created_at)
   .content

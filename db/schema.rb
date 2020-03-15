@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_02_111215) do
+ActiveRecord::Schema.define(version: 2020_03_14_153301) do
 
   create_table "admin_rooms", force: :cascade do |t|
     t.integer "admin_id"
     t.integer "room_id"
-    t.datetime "last_accessed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "last_read_message_id"
     t.index ["admin_id"], name: "index_admin_rooms_on_admin_id"
+    t.index ["last_read_message_id"], name: "index_admin_rooms_on_last_read_message_id"
     t.index ["room_id"], name: "index_admin_rooms_on_room_id"
   end
 
@@ -42,10 +43,11 @@ ActiveRecord::Schema.define(version: 2020_02_02_111215) do
   create_table "customer_rooms", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "room_id"
-    t.datetime "last_accessed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "last_read_message_id"
     t.index ["customer_id"], name: "index_customer_rooms_on_customer_id"
+    t.index ["last_read_message_id"], name: "index_customer_rooms_on_last_read_message_id"
     t.index ["room_id"], name: "index_customer_rooms_on_room_id"
   end
 

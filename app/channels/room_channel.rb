@@ -12,6 +12,12 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    current_user.messages.create!(content: data['message'], room: Room.find_by(id: data['room_id']))
+    message = current_user.messages.create!(content: data['message'], room: Room.find_by(id: data['room_id']))
+
+    if data['sender'] == 'customer'
+      current_user.customer_rooms.update_attribute(:last_read_message_id, message.id)
+    elsif data['sender'] == 'admin'
+      AdminRoom.find_by(room_id: data['room_id'], admin_id: current_user.id).update_attribute(:last_read_message_id, message.id)
+    end
   end
 end
