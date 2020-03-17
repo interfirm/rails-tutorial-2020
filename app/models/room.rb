@@ -9,7 +9,7 @@ class Room < ApplicationRecord
     return false if messages.empty?
 
     if user.instance_of?(Customer)
-      last_read_message_id = user.customer_rooms.last_read_message_id
+      last_read_message_id = user.customer_room.last_read_message_id
     elsif user.instance_of?(Admin)
       last_read_message_id = AdminRoom.find_by(room_id: id, admin_id: user.id).last_read_message_id
     end

@@ -11,12 +11,19 @@ App.room = App.cable.subscriptions.create "RoomChannel",
         api_request("/api/admins/read_message/#{$('#messages').data('admin_room_id')}", {message_id: data['message_id']})
 
       if $('#messages').data('sender') == 'customer' && data['sender'] == 'admin'
-        api_request("/api/read_message/#{$('#messages').data('customer_room_id')}", {message_id: data['message_id']})
-        
+        if $('.chat').find('.content').css('display') == 'block'
+          api_request("/api/read_message/#{$('#messages').data('customer_room_id')}", {message_id: data['message_id']})
+        else
+          $('.chat').find('.new-icon').css('display', 'block')
+
       $('#messages').append data['message']
 
-  speak: (message, room_id) ->
-    @perform 'speak', message: message, room_id: room_id
+    if location.pathname == '/admins/rooms'
+      if !$("#room_id_#{data['room_id']}").find('.timestamp').hasClass("unread")
+        $("#room_id_#{data['room_id']}").find('.timestamp').addClass('unread')
+
+  speak: (message, room_id, sender) ->
+    @perform 'speak', message: message, room_id: room_id, sender: sender
 
 api_request = (url, data) ->
   method = 'POST'
@@ -27,12 +34,11 @@ api_request = (url, data) ->
   }
   fetch(url, {method, headers, body})
     .then((res)=> res.json())
-    .then(console.log)
-    .catch(console.error);
+    .catch(console.error)
   return
 
 $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
   if event.keyCode is 13 # return = send
-    App.room.speak event.target.value, $('#messages').data('room_id')
+    App.room.speak event.target.value, $('#messages').data('room_id'), $('#messages').data('sender')
     event.target.value = ''
     event.preventDefault()

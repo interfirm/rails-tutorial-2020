@@ -16,12 +16,21 @@
     .title {
       width: 100%;
       background-color: cornsilk;
+      position: relative;
     }
     .close-btn {
       width: 30px;
       text-align: center;
       background-color: white;
       margin-left: auto;
+    }
+    .new-icon {
+      display: none;
+      width: 30px;
+      text-align: center;
+      position: absolute;
+      right: 0;
+      top: 0;
     }
   }
   .content {

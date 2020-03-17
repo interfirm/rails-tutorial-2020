@@ -9,7 +9,6 @@ class RoomsController < ApplicationController
     @customer_room = current_customer.customer_room
     @room = @current_customer.room
     @messages = @room.messages
-    @customer_room.update_attribute(:last_read_message_id, @messages.last.id)
 
     render :show
   end
