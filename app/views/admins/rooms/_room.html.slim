@@ -1,5 +1,5 @@
-= link_to admins_room_path(room), class: 'room' do
-  .header id="room_id_#{room.id}"
+= link_to admins_room_path(room), class: 'room', id: "room_id_#{room.id}" do
+  .header
     .title
       = room.id
     .timestamp class=('unread' if room.has_unread_message?(@current_admin))

@@ -7,18 +7,20 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
   received: (data) ->
     if $('#messages').data('room_id') == data['room_id']
-      if $('#messages').data('sender') == 'admin' && data['sender'] == 'customer'
+      if $('#messages').data('sender') == 'admin' && data['sender'] == 'ゲスト'
         api_request("/api/admins/read_message/#{$('#messages').data('admin_room_id')}", {message_id: data['message_id']})
 
-      if $('#messages').data('sender') == 'customer' && data['sender'] == 'admin'
+      if $('#messages').data('sender') == 'customer' && data['sender'] == 'サポート'
         if $('.chat').find('.content').css('display') == 'block'
           api_request("/api/read_message/#{$('#messages').data('customer_room_id')}", {message_id: data['message_id']})
         else
           $('.chat').find('.new-icon').css('display', 'block')
 
-      $('#messages').append data['message']
+      $('#messages').append "<p>#{data['sender']}: #{data['message']}</p>"
 
     if location.pathname == '/admins/rooms'
+      $("#room_id_#{data['room_id']}").find('.timestamp').text(data['timestamp'])
+      $("#room_id_#{data['room_id']}").find('.content').text("#{data['sender']}: #{data['message']}")
       if !$("#room_id_#{data['room_id']}").find('.timestamp').hasClass("unread")
         $("#room_id_#{data['room_id']}").find('.timestamp').addClass('unread')
 
