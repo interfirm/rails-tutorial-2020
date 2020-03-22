@@ -6,7 +6,8 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    if $('#messages').data('room_id') == data['room_id']
+    room_id = data['room_id']
+    if $('#messages').data('room_id') == room_id
       if $('#messages').data('sender') == 'admin' && data['sender'] == 'ゲスト'
         api_request("/api/admins/read_message/#{$('#messages').data('admin_room_id')}", {message_id: data['message_id']})
 
@@ -19,10 +20,11 @@ App.room = App.cable.subscriptions.create "RoomChannel",
       $('#messages').append "<p>#{data['sender']}: #{data['message']}</p>"
 
     if location.pathname == '/admins/rooms'
-      $("#room_id_#{data['room_id']}").find('.timestamp').text(data['timestamp'])
-      $("#room_id_#{data['room_id']}").find('.content').text("#{data['sender']}: #{data['message']}")
-      if !$("#room_id_#{data['room_id']}").find('.timestamp').hasClass("unread")
-        $("#room_id_#{data['room_id']}").find('.timestamp').addClass('unread')
+      room = $("#room_id_#{room_id}")
+      room.find('.timestamp').text(data['timestamp'])
+      room.find('.content').text("#{data['sender']}: #{data['message']}")
+      if $('#messages').data('room_id') != room_id && !room.find('.timestamp').hasClass("unread")
+        room.find('.timestamp').addClass('unread')
 
   speak: (message, room_id, sender) ->
     @perform 'speak', message: message, room_id: room_id, sender: sender

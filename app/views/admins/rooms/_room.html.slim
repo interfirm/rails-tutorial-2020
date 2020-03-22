@@ -1,4 +1,4 @@
-= link_to admins_room_path(room), class: 'room', id: "room_id_#{room.id}" do
+= link_to admins_room_path(room), class: 'room', id: "room_id_#{room.id}", remote: true do
   .header
     .title
       = room.id

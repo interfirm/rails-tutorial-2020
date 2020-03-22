@@ -1,5 +1,18 @@
-.rooms {
-  width: 70%;
+.chat-home {
+  display: flex;
+  .rooms {
+    width: 30%;
+  }
+  .room-window {
+    width: 70%;
+    height: 100vh;
+    background-color: aliceblue;
+    overflow: scroll;
+    padding: 0 5px;
+    form {
+      padding-bottom: 20px;
+    }
+  }
 }
 
 .room {
