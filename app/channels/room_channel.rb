@@ -15,9 +15,9 @@ class RoomChannel < ApplicationCable::Channel
     message = current_user.messages.create!(content: data['message'], room: Room.find_by(id: data['room_id']))
 
     if data['sender'] == 'customer'
-      current_user.customer_room.update_attribute(:last_read_message_id, message.id)
+      current_user.customer_room.update_attribute(:latest_read_message_id, message.id)
     elsif data['sender'] == 'admin'
-      AdminRoom.find_by(room_id: data['room_id'], admin_id: current_user.id).update_attribute(:last_read_message_id, message.id)
+      AdminRoom.find_by(room_id: data['room_id'], admin_id: current_user.id).update_attribute(:latest_read_message_id, message.id)
     end
   end
 end
