@@ -7,24 +7,33 @@ App.room = App.cable.subscriptions.create "RoomChannel",
 
   received: (data) ->
     room_id = data['room_id']
-    if $('#messages').data('room_id') == room_id
-      if $('#messages').data('sender') == 'admin' && data['sender'] == 'ゲスト'
-        api_request("/api/admins/read_message/#{$('#messages').data('admin_room_id')}", {message_id: data['message_id']})
+    receiver = $('#messages').data('sender')
+    sender = data['sender']
 
-      if $('#messages').data('sender') == 'customer' && data['sender'] == 'サポート'
+    message = data['message']
+    message_id = data['message_id']
+    message_room_id = $('#messages').data('room_id')
+
+    if message_room_id == room_id
+      if receiver == 'admin' && sender == 'ゲスト'
+        api_request("/api/admins/read_message/#{$('#messages').data('admin_room_id')}", {message_id: message_id})
+
+      if receiver == 'customer' && sender == 'サポート'
         if $('.chat').find('.content').css('display') == 'block'
-          api_request("/api/read_message/#{$('#messages').data('customer_room_id')}", {message_id: data['message_id']})
+          api_request("/api/read_message/#{$('#messages').data('customer_room_id')}", {message_id: message_id})
         else
           $('.chat').find('.new-icon').css('display', 'block')
 
-      $('#messages').append "<p>#{data['sender']}: #{data['message']}</p>"
+      $('#messages').append "<p>#{sender}: #{message}</p>"
 
     if location.pathname == '/admins/rooms'
       room = $("#room_id_#{room_id}")
-      room.find('.timestamp').text(data['timestamp'])
-      room.find('.content').text("#{data['sender']}: #{data['message']}")
-      if $('#messages').data('room_id') != room_id && !room.find('.timestamp').hasClass("unread")
-        room.find('.timestamp').addClass('unread')
+      timestamp = room.find('.timestamp')
+
+      timestamp.text(data['timestamp'])
+      room.find('.content').text("#{sender}: #{message}")
+      if message_room_id != room_id && !timestamp.hasClass("unread")
+        timestamp.addClass('unread')
 
   speak: (message, room_id, sender) ->
     @perform 'speak', message: message, room_id: room_id, sender: sender
