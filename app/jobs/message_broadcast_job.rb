@@ -5,7 +5,7 @@ class MessageBroadcastJob < ApplicationJob
     RoomChannel.broadcast_to(
       message.room.id,
       message: message.content,
-      timestamp: message.created_at.in_time_zone('Tokyo').strftime('%R'),
+      timestamp: message.created_at.strftime('%R'),
       room_id: message.room.id,
       message_id: message.id,
       sender: message.messageable.sender_name
