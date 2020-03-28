@@ -8,7 +8,7 @@ script#vue-template-messages(type="text/x-template")
       .close-btn(v-on:click='close' v-show='isOpen')
         | x
     .content(v-show='isOpen')
-      #messages(data-room_id="#{@room.id}" data-sender="customer" data-customer_room_id="#{@customer_room.id}")
+      #messages(data-room_id="#{@room.id}" data-sender="Customer" data-customer_room_id="#{@customer_room.id}")
         = render(partial: 'messages/message', collection: @messages)
 
       form

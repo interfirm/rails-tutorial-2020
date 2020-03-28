@@ -8,7 +8,8 @@ class MessageBroadcastJob < ApplicationJob
       timestamp: message.created_at.strftime('%R'),
       room_id: message.room.id,
       message_id: message.id,
-      sender: message.messageable.sender_name
+      sender: message.messageable_type,
+      sender_display_name: message.messageable.sender_display_name
     )
   end
 end

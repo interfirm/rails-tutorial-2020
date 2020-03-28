@@ -9,4 +9,4 @@
         = message_datetime(datetime: latest_message.created_at)
   .content
     - if latest_message
-      = "#{latest_message.messageable.sender_name}：#{latest_message.content}"
+      = "#{latest_message.messageable.sender_display_name}：#{latest_message.content}"

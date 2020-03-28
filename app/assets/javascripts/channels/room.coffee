@@ -9,29 +9,30 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     room_id = data['room_id']
     receiver = $('#messages').data('sender')
     sender = data['sender']
+    sender_display_name = data['sender_display_name']
 
     message = data['message']
     message_id = data['message_id']
     message_room_id = $('#messages').data('room_id')
 
     if message_room_id == room_id
-      if receiver == 'admin' && sender == 'ゲスト'
+      if receiver == 'admin' && sender == 'Customer'
         api_request("/api/admins/read_message/#{$('#messages').data('admin_room_id')}", {message_id: message_id})
 
-      if receiver == 'customer' && sender == 'サポート'
+      if receiver == 'customer' && sender == 'Admin'
         if $('.chat').find('.content').css('display') == 'block'
           api_request("/api/read_message/#{$('#messages').data('customer_room_id')}", {message_id: message_id})
         else
           $('.chat').find('.new-icon').css('display', 'block')
 
-      $('#messages').append "<p>#{sender}: #{message}</p>"
+      $('#messages').append "<p>#{sender_display_name}: #{message}</p>"
 
     if location.pathname == '/admins/rooms'
       room = $("#room_id_#{room_id}")
       timestamp = room.find('.timestamp')
 
       timestamp.text(data['timestamp'])
-      room.find('.content').text("#{sender}: #{message}")
+      room.find('.content').text("#{sender_display_name}: #{message}")
       if message_room_id != room_id && !timestamp.hasClass("unread")
         timestamp.addClass('unread')
 
