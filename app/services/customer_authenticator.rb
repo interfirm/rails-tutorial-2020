@@ -6,7 +6,7 @@ module CustomerAuthenticator
     cookies.permanent[:remember_token] = customer.remember_token
     room = Room.create
     room.create_customer_room(customer: customer)
-    room.admin_rooms.create!(admin: Admin.order('RANDOM()').first)
+    room.admin_rooms.create!(admin: Admin.offset(rand(Admin.count)).first)
   end
 
   def current_customer
