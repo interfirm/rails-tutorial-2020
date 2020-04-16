@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require cable.js
 //= require channels/room.coffee
+//= require admins/rooms.coffee

@@ -1,0 +1,16 @@
+body {
+  margin: 0!important;
+}
+
+p.notice, p.alert {
+    margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  &:hover, :focus, :visited{
+    text-decoration: none;
+    color: black;
+  }
+}

@@ -1,8 +1,4 @@
-h1 show
-
-h3 messages
-
-#messages(data-room_id="#{@room.id}")
+#messages(data-room_id="#{@room.id}" data-sender="Admin" data-admin_room_id="#{@admin_room.id}")
   = render(partial: "messages/message", collection: @messages)
 
 form

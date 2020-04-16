@@ -1,4 +1,5 @@
 class Admin < ApplicationRecord
+  include Messageable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,10 +7,9 @@ class Admin < ApplicationRecord
 
   has_many :admin_rooms, dependent: :destroy
   has_many :rooms, through: :admin_rooms
-  has_many :messages, as: :messageable
 
   # messageable interface
-  def sender_name
+  def sender_display_name
     'サポート'
   end
 end

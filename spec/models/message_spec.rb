@@ -21,12 +21,12 @@ RSpec.describe Message, type: :model do
     end
   end
 
-  describe 'sender_name' do
+  describe 'sender_display_name' do
     before do
       user.messages.build(content: 'hoge', room: room)
     end
 
-    subject { user.messages.first.messageable.sender_name }
+    subject { user.messages.first.messageable.sender_display_name }
 
     context 'Customerの場合' do
       let(:user) { create(:customer) }
@@ -36,6 +36,24 @@ RSpec.describe Message, type: :model do
     context 'Adminの場合' do
       let(:user) { create(:admin) }
       it { is_expected.to eq 'サポート' }
+    end
+  end
+
+  describe 'sender' do
+    before do
+      user.messages.build(content: 'hoge', room: room)
+    end
+
+    subject { user.messages.first.messageable_type }
+
+    context 'Customerの場合' do
+      let(:user) { create(:customer) }
+      it { is_expected.to eq 'Customer' }
+    end
+
+    context 'Adminの場合' do
+      let(:user) { create(:admin) }
+      it { is_expected.to eq 'Admin' }
     end
   end
 end

@@ -1,0 +1,12 @@
+- latest_message = room.messages.last
+
+= link_to admins_room_path(room), class: 'room', id: "room_id_#{room.id}", remote: true do
+  .header
+    .title
+      = room.id
+    .timestamp class=('unread' if room.has_unread_message?(@current_admin))
+      - if latest_message
+        = message_datetime(datetime: latest_message.created_at)
+  .content
+    - if latest_message
+      = "#{latest_message.messageable.sender_display_name}：#{latest_message.content}"

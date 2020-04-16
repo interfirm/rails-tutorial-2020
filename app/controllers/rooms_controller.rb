@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
 
   def enter
     @current_customer = current_customer
+    @customer_room = current_customer.customer_room
     @room = @current_customer.room
     @messages = @room.messages
 

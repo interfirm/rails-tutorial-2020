@@ -1,0 +1,37 @@
+.chat-home {
+  display: flex;
+  .rooms {
+    width: 30%;
+  }
+  .room-window {
+    width: 70%;
+    height: 100vh;
+    background-color: aliceblue;
+    overflow: scroll;
+    padding: 0 5px;
+    form {
+      padding-bottom: 20px;
+    }
+  }
+}
+
+.room {
+  display: block;
+  padding: 5px 10px;
+  border: 1px solid #d3d3d3;
+  .header {
+    display: flex;
+    line-height: 1em;
+    .title {
+      margin-right: 20px;
+    }
+    .unread {
+      color: red;
+    }
+  }
+  .content {
+    height: 2.6em;
+    line-height: 1.3em;
+    overflow: hidden;
+  }
+}
